@@ -1,17 +1,19 @@
 from django.test import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.common.keys import Keys
 import time
 import unittest
 
-class NewVisitorTest(LiveServerTestCase):
+class NewVisitorTest(StaticLiveServerTestCase):
 
 	def setUp(self):
 		self.browser = webdriver.Firefox()
 		self.browser.implicitly_wait(3)
 
 	def tearDown(self):
+		self.browser.refresh()
 		self.browser.quit()
 		
 	def stale_aware_for_action(self, action):
@@ -118,15 +120,15 @@ class NewVisitorTest(LiveServerTestCase):
 		self.assertAlmostEqual(
 			inputbox.location['x'] + inputbox.size['width'] / 2,
 			512,
-			delta = 5
+			delta = 10
 		)
 		
 		# She starts a new list and sees the input is nicely
 		# centered there too
-		inpubox.send_keys('testing\n')
-		inpubox = self.browser.find_element_by_id('id_new_item')
+		inputbox.send_keys('testing\n')
+		inputbox = self.browser.find_element_by_id('id_new_item')
 		self.assertAlmostEqual(
 			inputbox.location['x'] + inputbox.size['width'] / 2,
 			512,
-			delta = 5
+			delta = 10
 		)
