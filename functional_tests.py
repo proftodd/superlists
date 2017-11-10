@@ -65,7 +65,7 @@ class NewVisitorTest(unittest.TestCase):
 		def check_for_first_item_second_time():
 			self.check_for_row_in_list_table('1: Buy peacock feathers')
 		def check_for_second_item():
-			self.check_for_row_in_list_table('2. Use peacock feathers to make a fly')
+			self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
 		
 		self.stale_aware_for_action(check_for_first_item_second_time)
 		self.stale_aware_for_action(check_for_second_item)
