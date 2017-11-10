@@ -2,6 +2,7 @@ from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import StaleElementReferenceException
 from selenium.webdriver.common.keys import Keys
+import time
 import unittest
 
 class NewVisitorTest(LiveServerTestCase):
@@ -50,6 +51,7 @@ class NewVisitorTest(LiveServerTestCase):
 		# When she hits enter, the page updates, and now the page lists
 		# "1: Buy peacock feathers" as an item in a to-do list
 		inputbox.send_keys(Keys.ENTER)
+		time.sleep(5)
 		edith_list_url = self.browser.current_url
 		self.assertRegex(edith_list_url, '/lists/.+')
 		def check_for_first_item_first_time():
@@ -92,6 +94,7 @@ class NewVisitorTest(LiveServerTestCase):
 		inputbox = self.browser.find_element_by_id('id_new_item')
 		inputbox.send_keys('Buy milk')
 		inputbox.send_keys(Keys.ENTER)
+		time.sleep(5)
 		
 		# Francis gets his own unique URL
 		francis_list_url = self.browser.current_url
