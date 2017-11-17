@@ -22,7 +22,7 @@ class ItemValidationTest(FunctionalTest):
 
 		# She receives a similar warning on the list page
 		error = self.browser.find_element_by_css_selector('.has-error')
-		self.assertEqual(error.text, "You can't have an emtpy list item")
+		self.assertEqual(error.text, "You can't have an empty list item")
 
 		# And she can correct it by filling some text in
 		self.get_item_input_box().send_keys('Make tea\n')
